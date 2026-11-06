@@ -24,11 +24,6 @@ class Inventory
             quantity = 50
         };
 
-        Console.WriteLine("Product Details:");
-        Console.WriteLine($"Product ID: {keyboard.productId}");
-        Console.WriteLine($"Product Name: {keyboard.productName}");
-        Console.WriteLine($"Price: ${keyboard.price}");
-        Console.WriteLine($"Quantity: {keyboard.quantity}");
 
         Product mouse = new Product()
         {
@@ -38,11 +33,8 @@ class Inventory
             quantity = 100
         };
 
-        Console.WriteLine("Product Details:");
-        Console.WriteLine($"Product ID: {mouse.productId}");
-        Console.WriteLine($"Product Name: {mouse.productName}");
-        Console.WriteLine($"Price: ${mouse.price}");
-        Console.WriteLine($"Quantity: {mouse.quantity}");
+        products.Add(keyboard);
+        products.Add(mouse);
 
 
         int choice = 0;
@@ -64,6 +56,7 @@ class Inventory
             switch (choice)
             {
                 case 1:
+                {
                     Product newProduct = new();
 
                     Console.Write("Enter Product ID: ");
@@ -79,11 +72,12 @@ class Inventory
                     newProduct.quantity = int.Parse(Console.ReadLine());
 
                     prouduts.Add(newProduct);
-                    Console.WriteLine("Product Sucessfully added!");
+                    Console.WriteLine("Product Sucess   fully added!");
 
                     break;
-
+                }
                 case 2:
+                {
                     Console.WriteLine("\n----PRODUCTS LIST------");
 
                     foreach (Product product in products)
@@ -95,7 +89,9 @@ class Inventory
                         Console.WriteLine($"Product Quantity: {product.quantity}");
                     }
                     break;
+                }    
                 case 3:
+                {
                     Console.WriteLine("Enter Product ID to search: ");
                     int searchId = int.Parse(Console.ReadLine());
 
@@ -121,8 +117,9 @@ class Inventory
                         Console.WriteLine("Product not found");
                     }
                     break;
-                    
+                }   
                 case 4:
+                {
                     Console.WriteLine("-------UPDATE A PRODUCT--------");
                     Console.Write("Enter Product ID: ");
                     int updateId = int.Parse(Console.ReadLine());
@@ -154,8 +151,9 @@ class Inventory
                         Console.WriteLine("Product Not Found!");
                     }
                     break;
-
+                }
                 case 5:
+                {
                     Console.Write("Enter Product ID: ");
                     int deleteId = int.Parse(Console.ReadLine());
 
@@ -180,8 +178,9 @@ class Inventory
                         Console.WriteLine("Product ID not found");
                     }
                     break;
-
+                }
                 case 6:
+                {
                     decimal totalValue = 0;
 
                     foreach (Product product in products)
@@ -192,9 +191,9 @@ class Inventory
                     Console.WriteLine("=========INVENTORY VALUE==========");
                     Console.WriteLine($"Total Inventory value: ${totalValue}");
                     break;
-                
+                }
                 case 7:
-                    // Exit
+                    Console.WriteLine("Exiting Inventory System..");
                     break;
 
 
