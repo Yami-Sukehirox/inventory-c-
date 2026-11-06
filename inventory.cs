@@ -50,8 +50,12 @@ class Inventory
             Console.WriteLine("6. Calculate inventory value");
             Console.WriteLine("7. Exit");
 
-            Console.Write("Please select an option: ");
-            choice = int.Parse(Console.ReadLine());
+            Console.WriteLine("SELECT YOU CHOICE");
+           if(!int.TryParse(Console.ReadLine(), out choice))
+            {
+                Console.WriteLine("Please Enter a valid number!");
+                continue;
+            }
 
             switch (choice)
             {
@@ -60,19 +64,49 @@ class Inventory
                     Product newProduct = new();
 
                     Console.Write("Enter Product ID: ");
-                    newProduct.productId = int.Parse(Console.ReadLine());
+                    if (!int.TryParse(Console.ReadLine(), out newProduct.productId) || newProduct.productId <= 0)
+                        {
+                            Console.WriteLine("Invalid Product ID");
+                            break;
+                        }
 
                     Console.Write("Enter Product Name: ");
                     newProduct.productName = Console.ReadLine();
 
                     Console.Write("Enter Product Price: ");
-                    newProduct.price = decimal.Parse(Console.ReadLine());
+                    if (!decimal.TryParse(Console.ReadLine(), out newProduct.price) || newProduct.price < 0)
+                        {
+                            Console.WriteLine("Invalid Price");
+                            break;
+                        }
 
                     Console.Write("Enter Product Quantity: ");
-                    newProduct.quantity = int.Parse(Console.ReadLine());
+                    if (!int.TryParse(Console.ReadLine(), out newProduct.quantity) || newProduct.quantity < 0)
+                        {
+                            Console.WriteLine("Invalid Quantity");
+                            break;
+                        }
 
-                    prouduts.Add(newProduct);
-                    Console.WriteLine("Product Sucess   fully added!");
+                    // Check for duplicate Product ID
+                    bool idExists = false;
+
+                    foreach (Product product in products)
+                    {
+                        if (product.productId == newProduct.productId)
+                        {
+                            idExists = true;
+                            break;
+                        }
+                    }
+
+                    if (idExists)
+                    {
+                        Console.WriteLine("Product ID already exists!");
+                        break;
+                    }    
+
+                    products.Add(newProduct);
+                    Console.WriteLine("Product Sucess fully added!");
 
                     break;
                 }
@@ -101,12 +135,13 @@ class Inventory
                     {
                         if (product.productId == searchId)
                         {
-                            Console.WriteLine("\nProduct Found");
-                            Console.WriteLine($"ID: {product.productId}");
-                            Console.WriteLine($"Product Name: {product.productName}");
-                            Console.WriteLine($"Product Price: {product.price}");
-                            Console.WriteLine($"Product Quantity: {product.quantity}");
 
+                            Console.WriteLine("\n======= SEARCH PRODUCT =======");
+                            Console.WriteLine("1. Search by Product ID");
+                            Console.WriteLine("2. Seach by Prodcuct name");
+                            Console.WriteLine("3. Back to Menu");
+
+                            
                             found = true;
                             break;
                         }
@@ -134,7 +169,7 @@ class Inventory
                             product.productName = Console.ReadLine();
 
                             Console.WriteLine("Enter New Product Price: ");
-                            product.price = decimal.Parse(Console.ReadLine);
+                            product.price = decimal.Parse(Console.ReadLine());
 
                             Console.WriteLine("Enter New Product Quantity: ");
                             product.quantity = int.Parse(Console.ReadLine());
