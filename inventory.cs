@@ -124,35 +124,95 @@ class Inventory
                     }
                     break;
                 }    
+               
                 case 3:
                 {
-                    Console.WriteLine("Enter Product ID to search: ");
-                    int searchId = int.Parse(Console.ReadLine());
+                    Console.WriteLine("\n===== SEARCH PRODUCT =====");
+                    Console.WriteLine("1. Search by Product ID");
+                    Console.WriteLine("2. Search by Product Name");
+                    Console.WriteLine("3. Back to Main Menu");
 
-                    bool found = false;
+                    Console.Write("Enter your choice: ");
+                    int searchChoice = int.Parse(Console.ReadLine());
 
-                    foreach (Product product in products)
-                    {
-                        if (product.productId == searchId)
+                    switch (searchChoice)
                         {
+                            case 1:
+                            {
+                                Console.Write("Enter Product ID: ");
 
-                            Console.WriteLine("\n======= SEARCH PRODUCT =======");
-                            Console.WriteLine("1. Search by Product ID");
-                            Console.WriteLine("2. Seach by Prodcuct name");
-                            Console.WriteLine("3. Back to Menu");
+                                if (!int.TryParse(Console.ReadLine(), out int searchId))
+                                {
+                                    Console.WriteLine("Invalid Product ID");
+                                    break;
+                                }
 
-                            
-                            found = true;
-                            break;
+                                bool found = false;
+
+                                foreach (Product product in products)
+                                {
+                                    if (product.productId == searchId)
+                                    {
+                                        Console.WriteLine("\nProduct Found");
+                                        Console.WriteLine($"Name: {product.productName}");
+                                        Console.WriteLine($"Price: ${product.price}");
+                                        Console.WriteLine($"Quantity: {product.quantity}");
+
+                                        found = true;
+                                        break;
+                                    }
+                                }
+
+                                if (!found)
+                                    {
+                                        Console.WriteLine("Product not found");
+                                    }
+                                    break;
+                                }   
+                            case 2:
+                                {
+                                    Console.Write("Enter Product Name: ");
+                                    
+                                    string searchName = Console.ReadLine();
+
+                                    if (string.IsNullOrWhiteSpace(searchName))
+                                        {
+                                            Console.WriteLine("Product name cannot be empty!");
+                                            break;
+                                        }
+                                    bool found = false;
+
+                                    foreach (Product product in products)
+                                    {
+                                        if (product.productName == searchName.ToLower())
+                                        {
+                                            Console.WriteLine("\nProduct Found");
+                                            Console.WriteLine($"ID: {product.productId}");
+                                            Console.WriteLine($"Name: {product.productName}");
+                                            Console.WriteLine($"Price: {product.price}");
+                                            Console.WriteLine($"Quantity: {product.quantity}");
+
+                                            found == true;
+                                            break;
+                                        }
+                                    }
+
+                                    if (!found)
+                                    {
+                                        Console.WriteLine("Product not found");
+                                    }
+                                    break;
+                                }
+                                
+                            case 3:
+                                Console.WriteLine("Back to main menu selected.");
+                                break;
+                            default:
+                                Console.WriteLine("Invalid Choice");
+                                break;    
                         }
-                    }
-
-                    if (found == false)
-                    {
-                        Console.WriteLine("Product not found");
-                    }
                     break;
-                }   
+                }
                 case 4:
                 {
                     Console.WriteLine("-------UPDATE A PRODUCT--------");
