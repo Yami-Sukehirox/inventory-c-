@@ -184,7 +184,7 @@ class Inventory
 
                                     foreach (Product product in products)
                                     {
-                                        if (product.productName == searchName.ToLower())
+                                        if (product.productName.ToLower() == searchName.ToLower())
                                         {
                                             Console.WriteLine("\nProduct Found");
                                             Console.WriteLine($"ID: {product.productId}");
@@ -192,7 +192,7 @@ class Inventory
                                             Console.WriteLine($"Price: {product.price}");
                                             Console.WriteLine($"Quantity: {product.quantity}");
 
-                                            found == true;
+                                            found = true;
                                             break;
                                         }
                                     }
@@ -217,7 +217,11 @@ class Inventory
                 {
                     Console.WriteLine("-------UPDATE A PRODUCT--------");
                     Console.Write("Enter Product ID: ");
-                    int updateId = int.Parse(Console.ReadLine());
+                    if (!int.TryParse(Console.ReadLine(), out int updateId))
+                        {
+                            Console.WriteLine("Invalid Product ID");
+                            break;
+                        }
 
                     bool found = false;
 
@@ -229,10 +233,22 @@ class Inventory
                             product.productName = Console.ReadLine();
 
                             Console.WriteLine("Enter New Product Price: ");
-                            product.price = decimal.Parse(Console.ReadLine());
+                            if (!decimal.TryParse(Console.ReadLine(), out decimal newPrice) || newPrice < 0)
+                                {
+                                    Console.WriteLine("Invalid Price!");
+                                    break;
+                                }
+
+                                product.price = newPrice;
 
                             Console.WriteLine("Enter New Product Quantity: ");
-                            product.quantity = int.Parse(Console.ReadLine());
+                            if (!int.TryParse(Console.ReadLine(), out int newQuantity) || newQuantity < 0)
+                                {
+                                    Console.WriteLine("Invalid Quantity!");
+                                    break;
+                                }
+
+                                product.quantity = newQuantity;
 
                             Console.WriteLine("Product Successfully Updated!");
 
