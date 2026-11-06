@@ -124,6 +124,7 @@ class Inventory
                     
                 case 4:
                     Console.WriteLine("-------UPDATE A PRODUCT--------");
+                    Console.Write("Enter Product ID: ");
                     int updateId = int.Parse(Console.ReadLine());
 
                     bool found = false;
@@ -155,11 +156,41 @@ class Inventory
                     break;
 
                 case 5:
-                    // delete
+                    Console.Write("Enter Product ID: ");
+                    int deleteId = int.Parse(Console.ReadLine());
+
+                    Product productToDelete = null;
+
+                    foreach (Product product in products)
+                    {
+                        if (product.productId == deleteId)
+                        {
+                            productToDelete = product;
+                            break;
+                        }
+                    }
+
+                    if (productToDelete != null)
+                    {
+                        products.Remove(productToDelete);
+                        Console.WriteLine("Product Sucessfully deleted!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Product ID not found");
+                    }
                     break;
 
                 case 6:
-                    // calculate 
+                    decimal totalValue = 0;
+
+                    foreach (Product product in products)
+                    {
+                        totalValue += product.price * product.quantity;
+                    }
+
+                    Console.WriteLine("=========INVENTORY VALUE==========");
+                    Console.WriteLine($"Total Inventory value: ${totalValue}");
                     break;
                 
                 case 7:
