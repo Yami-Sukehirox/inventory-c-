@@ -13,10 +13,9 @@ class Inventory
         public decimal price;
         public int quantity;
     }
-
-    List<Product> products = new List<Product>();
     static void Main(string[] args)
     {
+        List<Product> products = new List<Product>();
         Product keyboard = new Product()
         {
             productId = 1,
@@ -48,14 +47,16 @@ class Inventory
 
         int choice = 0;
 
-        while(choice != 4)
+        while(choice != 7)
         {
             Console.WriteLine("\nInventory Menu:");
             Console.WriteLine("1. Add New Product");
             Console.WriteLine("2. View Product Details");
             Console.WriteLine("3. Search Products");
-            Console.WriteLine("4. Exit");
-
+            Console.WriteLine("4. Update Products");
+            Console.WriteLine("5. Delete Products");
+            Console.WriteLine("6. Calculate inventory value");
+            Console.WriteLine("7. Exit");
 
             Console.Write("Please select an option: ");
             choice = int.Parse(Console.ReadLine());
@@ -63,7 +64,7 @@ class Inventory
             switch (choice)
             {
                 case 1:
-                    Process newProduct = new();
+                    Product newProduct = new();
 
                     Console.Write("Enter Product ID: ");
                     newProduct.productId = int.Parse(Console.ReadLine());
@@ -72,10 +73,10 @@ class Inventory
                     newProduct.productName = Console.ReadLine();
 
                     Console.Write("Enter Product Price: ");
-                    newProduct.productPrice = decimal.Parse(Console.ReadLine());
+                    newProduct.price = decimal.Parse(Console.ReadLine());
 
                     Console.Write("Enter Product Quantity: ");
-                    newProduct.productQuantity = decimal.Parse(Console.ReadLine());
+                    newProduct.quantity = int.Parse(Console.ReadLine());
 
                     prouduts.Add(newProduct);
                     Console.WriteLine("Product Sucessfully added!");
@@ -96,7 +97,7 @@ class Inventory
                     break;
                 case 3:
                     Console.WriteLine("Enter Product ID to search: ");
-                    int searchId = int.Parse(Console.WriteLine());
+                    int searchId = int.Parse(Console.ReadLine());
 
                     bool found = false;
 
@@ -122,8 +123,50 @@ class Inventory
                     break;
                     
                 case 4:
-                    Console.WriteLine("Exiting Inventory System..");
+                    Console.WriteLine("-------UPDATE A PRODUCT--------");
+                    int updateId = int.Parse(Console.ReadLine());
+
+                    bool found = false;
+
+                    foreach (Product product in products)
+                    {
+                        if(product.productId == updateId)
+                        {
+                            Console.WriteLine("Enter New Product Name: ");
+                            product.productName = Console.ReadLine();
+
+                            Console.WriteLine("Enter New Product Price: ");
+                            product.price = decimal.Parse(Console.ReadLine);
+
+                            Console.WriteLine("Enter New Product Quantity: ");
+                            product.quantity = int.Parse(Console.ReadLine());
+
+                            Console.WriteLine("Product Successfully Updated!");
+
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if (found == false)
+                    {
+                        Console.WriteLine("Product Not Found!");
+                    }
                     break;
+
+                case 5:
+                    // delete
+                    break;
+
+                case 6:
+                    // calculate 
+                    break;
+                
+                case 7:
+                    // Exit
+                    break;
+
+
                 default:
                     Console.WriteLine("Invalid choice!");
                     break;        
